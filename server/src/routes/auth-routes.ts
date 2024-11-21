@@ -26,7 +26,7 @@ export const login = async (req: Request, res: Response) => {
   const superSecretKey = process.env.JWT_SECRET_KEY || '';
   
   // Token is validated for one hour
-  const token = jwt.sign({username}, superSecretKey, {expiresIn: '1h'});
+  const token = jwt.sign({username}, superSecretKey, {expiresIn: '24h'});
 
   return res.json({token});
 };
