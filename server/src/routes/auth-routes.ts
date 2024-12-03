@@ -12,6 +12,7 @@ export const login = async (req: Request, res: Response) => {
     {where: {username}}
   );
   
+  // No user throws intentionally vague error
   if(!user){
     return res.status(401).json({message: 'Invalid username or password'});
   }
@@ -19,13 +20,14 @@ export const login = async (req: Request, res: Response) => {
   // Validate password for valid user
   const passwordIsValid = await bcrypt.compare(password, user.password);
 
+  // Invalid password throws same error
   if(!passwordIsValid) {
     return res.status(401).json({message: 'Invalid username or password'});
   }
 
   const superSecretKey = process.env.JWT_SECRET_KEY || '';
   
-  // Token is validated for one hour
+  // Token is validated for 24 hours
   const token = jwt.sign({username}, superSecretKey, {expiresIn: '24h'});
 
   return res.json({token});

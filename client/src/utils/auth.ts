@@ -17,8 +17,9 @@ class AuthService {
   }
 
   getToken(): string {
-    // TODO: return the token
-    return ''
+    // Returns the token
+    const loggedUser = localStorage.getItem('id_token') || '';
+    return loggedUser;
   }
 
   login(idToken: string) {
