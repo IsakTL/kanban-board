@@ -3,7 +3,7 @@
 class AuthService {
   getProfile() {
     // TODO: return the decoded token
-    return;
+    return this.getToken();
   }
 
   loggedIn() {
@@ -18,8 +18,8 @@ class AuthService {
 
   getToken(): string {
     // Returns the token
-    const loggedUser = localStorage.getItem('id_token') || '';
-    return loggedUser;
+    const token = localStorage.getItem('id_token') || '';
+    return token;
   }
 
   login(idToken: string) {
